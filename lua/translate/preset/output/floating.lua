@@ -35,10 +35,13 @@ function M.cmd(lines, _)
 
   M.window._current = { win = win, buf = buf }
 
-  api.nvim_create_autocmd("CursorMoved", {
-    callback = M.window.close,
-    once = true,
-  })
+  -- api.nvim_create_autocmd("CursorMoved", {
+  --   callback = M.window.close,
+  --   once = true,
+  -- })
+  vim.keymap.set({ "n", "v" }, "<esc>", function()
+    M.window.close()
+  end, { buffer = buf, silent = true })
 end
 
 function M.window.close()
